@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/filter.css">
+<link rel="stylesheet" href="css/nouislider.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/tailDT.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/wNumb.js"></script>
+        <script src="data/Intersection_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-6.912013528158865,106.30802121808931],[-6.187343570358354,107.32306859307526]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_Positron_0');
+        map.getPane('pane_Positron_0').style.zIndex = 400;
+        var layer_Positron_0 = L.tileLayer('https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+            pane: 'pane_Positron_0',
+            opacity: 1.0,
+            attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_Positron_0;
+        map.addLayer(layer_Positron_0);
+        function pop_Intersection_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Legenda</th>\
+                        <td>' + (feature.properties['Legenda'] !== null ? autolinker.link(feature.properties['Legenda'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Skor_TL'] !== null ? autolinker.link(feature.properties['Skor_TL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SKOR_TGL'] !== null ? autolinker.link(feature.properties['SKOR_TGL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME_2'] !== null ? autolinker.link(feature.properties['NAME_2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NAME_3</th>\
+                        <td>' + (feature.properties['NAME_3'] !== null ? autolinker.link(feature.properties['NAME_3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Intersection_1_0(feature) {
+            switch(String(feature.properties['Legenda'])) {
+                case 'Badan Air':
+                    return {
+                pane: 'pane_Intersection_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,114,130,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Bandara / Pelabuhan':
+                    return {
+                pane: 'pane_Intersection_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(75,211,186,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Belukar':
+                    return {
+                pane: 'pane_Intersection_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(217,161,42,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Hutan Lahan Kering Primer':
+                    return {
+                pane: 'pane_Intersection_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(209,81,216,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Hutan Lahan Kering Sekunder':
+                    return {
+                pane: 'pane_Intersection_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(200,217,49,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Hutan Tanaman':
+                    return {
+                pane: 'pane_Intersection_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,122,92,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pemukiman':
+                    return {
+                pane: 'pane_Intersection_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(19,228,99,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Perkebunan':
+                    return {
+                pane: 'pane_Intersection_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(185,126,237,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pertambangan':
+                    return {
+                pane: 'pane_Intersection_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(150,209,99,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pertanian Lahan Kering':
+                    return {
+                pane: 'pane_Intersection_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(64,227,58,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pertanian Lahan Kering Campur':
+                    return {
+                pane: 'pane_Intersection_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(203,12,130,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sawah':
+                    return {
+                pane: 'pane_Intersection_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(87,136,234,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Tanah Terbuka':
+                    return {
+                pane: 'pane_Intersection_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(117,184,206,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Intersection_1');
+        map.getPane('pane_Intersection_1').style.zIndex = 401;
+        map.getPane('pane_Intersection_1').style['mix-blend-mode'] = 'normal';
+        var layer_Intersection_1 = new L.geoJson(json_Intersection_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Intersection_1',
+            layerName: 'layer_Intersection_1',
+            pane: 'pane_Intersection_1',
+            onEachFeature: pop_Intersection_1,
+            style: style_Intersection_1_0,
+        });
+        bounds_group.addLayer(layer_Intersection_1);
+        map.addLayer(layer_Intersection_1);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Intersection<br /><table><tr><td style="text-align: center;"><img src="legend/Intersection_1_BadanAir0.png" /></td><td>Badan Air</td></tr><tr><td style="text-align: center;"><img src="legend/Intersection_1_BandaraPelabuhan1.png" /></td><td>Bandara / Pelabuhan</td></tr><tr><td style="text-align: center;"><img src="legend/Intersection_1_Belukar2.png" /></td><td>Belukar</td></tr><tr><td style="text-align: center;"><img src="legend/Intersection_1_HutanLahanKeringPrimer3.png" /></td><td>Hutan Lahan Kering Primer</td></tr><tr><td style="text-align: center;"><img src="legend/Intersection_1_HutanLahanKeringSekunder4.png" /></td><td>Hutan Lahan Kering Sekunder</td></tr><tr><td style="text-align: center;"><img src="legend/Intersection_1_HutanTanaman5.png" /></td><td>Hutan Tanaman</td></tr><tr><td style="text-align: center;"><img src="legend/Intersection_1_Pemukiman6.png" /></td><td>Pemukiman</td></tr><tr><td style="text-align: center;"><img src="legend/Intersection_1_Perkebunan7.png" /></td><td>Perkebunan</td></tr><tr><td style="text-align: center;"><img src="legend/Intersection_1_Pertambangan8.png" /></td><td>Pertambangan</td></tr><tr><td style="text-align: center;"><img src="legend/Intersection_1_PertanianLahanKering9.png" /></td><td>Pertanian Lahan Kering</td></tr><tr><td style="text-align: center;"><img src="legend/Intersection_1_PertanianLahanKeringCampur10.png" /></td><td>Pertanian Lahan Kering Campur</td></tr><tr><td style="text-align: center;"><img src="legend/Intersection_1_Sawah11.png" /></td><td>Sawah</td></tr><tr><td style="text-align: center;"><img src="legend/Intersection_1_TanahTerbuka12.png" /></td><td>Tanah Terbuka</td></tr></table>': layer_Intersection_1,"Positron": layer_Positron_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var mapDiv = document.getElementById('map');
+        var row = document.createElement('div');
+        row.className="row";
+        row.id="all";
+        row.style.height = "100%";
+        var col1 = document.createElement('div');
+        col1.className="col9";
+        col1.id = "mapWindow";
+        col1.style.height = "99%";
+        col1.style.width = "80%";
+        col1.style.display = "inline-block";
+        var col2 = document.createElement('div');
+        col2.className="col3";
+        col2.id = "menu";
+        col2.style.display = "inline-block";
+        mapDiv.parentNode.insertBefore(row, mapDiv);
+        document.getElementById("all").appendChild(col1);
+        document.getElementById("all").appendChild(col2);
+        col1.appendChild(mapDiv)
+        var Filters = {"NAME_3": "str","Legenda": "str"};
+        function filterFunc() {
+          map.eachLayer(function(lyr){
+          if ("options" in lyr && "dataVar" in lyr["options"]){
+            features = this[lyr["options"]["dataVar"]].features.slice(0);
+            try{
+              for (key in Filters){
+                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
+                if (Filters[key] == "str" || Filters[key] == "bool"){
+                  var selection = [];
+                  var options = document.getElementById("sel_" + keyS).options
+                  for (var i=0; i < options.length; i++) {
+                    if (options[i].selected) selection.push(options[i].value);
+                  }
+                    try{
+                      if (key in features[0].properties){
+                        for (i = features.length - 1;
+                          i >= 0; --i){
+                          if (selection.indexOf(
+                          features[i].properties[key])<0
+                          && selection.length>0) {
+                          features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                  }
+                }
+                if (Filters[key] == "int"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (parseInt(features[i].properties[key])
+                          < sliderVals[0]
+                          || parseInt(features[i].properties[key])
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "real"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (features[i].properties[key]
+                          < sliderVals[0]
+                          || features[i].properties[key]
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "date"
+                  || Filters[key] == "datetime"
+                  || Filters[key] == "time"){
+                  try{
+                    if (key in features[0].properties){
+                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
+                      startdate = document.getElementById("dat_" +
+                        HTMLkey + "_date1").value.replace(" ", "T");
+                      enddate = document.getElementById("dat_" +
+                        HTMLkey + "_date2").value.replace(" ", "T");
+                      for (i = features.length - 1; i >= 0; --i){
+                        if (features[i].properties[key] < startdate
+                          || features[i].properties[key] > enddate){
+                          features.splice(i,1);
+                        }
+                      }
+                    }
+                  } catch(err){
+                  }
+                }
+              }
+            } catch(err){
+            }
+          this[lyr["options"]["layerName"]].clearLayers();
+          this[lyr["options"]["layerName"]].addData(features);
+          }
+          })
+        }
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_NAME_3 = document.createElement('div');
+            div_NAME_3.id = "div_NAME_3";
+            div_NAME_3.className= "filterselect";
+            document.getElementById("menu").appendChild(div_NAME_3);
+            sel_NAME_3 = document.createElement('select');
+            sel_NAME_3.multiple = true;
+            sel_NAME_3.size = 10;
+            sel_NAME_3.id = "sel_NAME_3";
+            var NAME_3_options_str = "<option value='' unselected></option>";
+            sel_NAME_3.onchange = function(){filterFunc()};
+            NAME_3_options_str  += '<option value="Babakan Madang">Babakan Madang</option>';
+            NAME_3_options_str  += '<option value="Bojong Gede">Bojong Gede</option>';
+            NAME_3_options_str  += '<option value="Caringin">Caringin</option>';
+            NAME_3_options_str  += '<option value="Cariu">Cariu</option>';
+            NAME_3_options_str  += '<option value="Ciampea">Ciampea</option>';
+            NAME_3_options_str  += '<option value="Ciawi">Ciawi</option>';
+            NAME_3_options_str  += '<option value="Cibinong">Cibinong</option>';
+            NAME_3_options_str  += '<option value="Cibungbulang">Cibungbulang</option>';
+            NAME_3_options_str  += '<option value="Cigombong">Cigombong</option>';
+            NAME_3_options_str  += '<option value="Cigudeg">Cigudeg</option>';
+            NAME_3_options_str  += '<option value="Cijeruk">Cijeruk</option>';
+            NAME_3_options_str  += '<option value="Cileungsi">Cileungsi</option>';
+            NAME_3_options_str  += '<option value="Ciomas">Ciomas</option>';
+            NAME_3_options_str  += '<option value="Cisarua">Cisarua</option>';
+            NAME_3_options_str  += '<option value="Ciseeng">Ciseeng</option>';
+            NAME_3_options_str  += '<option value="Citeureup">Citeureup</option>';
+            NAME_3_options_str  += '<option value="Dramaga">Dramaga</option>';
+            NAME_3_options_str  += '<option value="Gunung Putri">Gunung Putri</option>';
+            NAME_3_options_str  += '<option value="Gunung Sindur">Gunung Sindur</option>';
+            NAME_3_options_str  += '<option value="Jasinga">Jasinga</option>';
+            NAME_3_options_str  += '<option value="Jonggol">Jonggol</option>';
+            NAME_3_options_str  += '<option value="Kelapa Nunggal">Kelapa Nunggal</option>';
+            NAME_3_options_str  += '<option value="Kemang">Kemang</option>';
+            NAME_3_options_str  += '<option value="Leuwiliang">Leuwiliang</option>';
+            NAME_3_options_str  += '<option value="Leuwisadeng">Leuwisadeng</option>';
+            NAME_3_options_str  += '<option value="Megamendung">Megamendung</option>';
+            NAME_3_options_str  += '<option value="Nanggung">Nanggung</option>';
+            NAME_3_options_str  += '<option value="Pamijahan">Pamijahan</option>';
+            NAME_3_options_str  += '<option value="Parung">Parung</option>';
+            NAME_3_options_str  += '<option value="Parung Panjang">Parung Panjang</option>';
+            NAME_3_options_str  += '<option value="Ranca Bungur">Ranca Bungur</option>';
+            NAME_3_options_str  += '<option value="Rumpin">Rumpin</option>';
+            NAME_3_options_str  += '<option value="Sukajaya">Sukajaya</option>';
+            NAME_3_options_str  += '<option value="Sukamakmur">Sukamakmur</option>';
+            NAME_3_options_str  += '<option value="Sukaraja">Sukaraja</option>';
+            NAME_3_options_str  += '<option value="Tajur Halang">Tajur Halang</option>';
+            NAME_3_options_str  += '<option value="Tamansari">Tamansari</option>';
+            NAME_3_options_str  += '<option value="Tanjungsari">Tanjungsari</option>';
+            NAME_3_options_str  += '<option value="Tenjo">Tenjo</option>';
+            NAME_3_options_str  += '<option value="Tenjolaya">Tenjolaya</option>';
+            sel_NAME_3.innerHTML = NAME_3_options_str;
+            div_NAME_3.appendChild(sel_NAME_3);
+            var lab_NAME_3 = document.createElement('div');
+            lab_NAME_3.innerHTML = 'NAME_3';
+            lab_NAME_3.className = 'filterlabel';
+            div_NAME_3.appendChild(lab_NAME_3);
+            var reset_NAME_3 = document.createElement('div');
+            reset_NAME_3.innerHTML = 'clear filter';
+            reset_NAME_3.className = 'filterlabel';
+            reset_NAME_3.onclick = function() {
+                var options = document.getElementById("sel_NAME_3").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_NAME_3.appendChild(reset_NAME_3);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Legenda = document.createElement('div');
+            div_Legenda.id = "div_Legenda";
+            div_Legenda.className= "filterselect";
+            document.getElementById("menu").appendChild(div_Legenda);
+            sel_Legenda = document.createElement('select');
+            sel_Legenda.multiple = true;
+            sel_Legenda.size = 10;
+            sel_Legenda.id = "sel_Legenda";
+            var Legenda_options_str = "<option value='' unselected></option>";
+            sel_Legenda.onchange = function(){filterFunc()};
+            Legenda_options_str  += '<option value="Badan Air">Badan Air</option>';
+            Legenda_options_str  += '<option value="Bandara / Pelabuhan">Bandara / Pelabuhan</option>';
+            Legenda_options_str  += '<option value="Belukar">Belukar</option>';
+            Legenda_options_str  += '<option value="Hutan Lahan Kering Primer">Hutan Lahan Kering Primer</option>';
+            Legenda_options_str  += '<option value="Hutan Lahan Kering Sekunder">Hutan Lahan Kering Sekunder</option>';
+            Legenda_options_str  += '<option value="Hutan Tanaman">Hutan Tanaman</option>';
+            Legenda_options_str  += '<option value="Pemukiman">Pemukiman</option>';
+            Legenda_options_str  += '<option value="Perkebunan">Perkebunan</option>';
+            Legenda_options_str  += '<option value="Pertambangan">Pertambangan</option>';
+            Legenda_options_str  += '<option value="Pertanian Lahan Kering">Pertanian Lahan Kering</option>';
+            Legenda_options_str  += '<option value="Pertanian Lahan Kering Campur">Pertanian Lahan Kering Campur</option>';
+            Legenda_options_str  += '<option value="Sawah">Sawah</option>';
+            Legenda_options_str  += '<option value="Tanah Terbuka">Tanah Terbuka</option>';
+            sel_Legenda.innerHTML = Legenda_options_str;
+            div_Legenda.appendChild(sel_Legenda);
+            var lab_Legenda = document.createElement('div');
+            lab_Legenda.innerHTML = 'Legenda';
+            lab_Legenda.className = 'filterlabel';
+            div_Legenda.appendChild(lab_Legenda);
+            var reset_Legenda = document.createElement('div');
+            reset_Legenda.innerHTML = 'clear filter';
+            reset_Legenda.className = 'filterlabel';
+            reset_Legenda.onclick = function() {
+                var options = document.getElementById("sel_Legenda").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_Legenda.appendChild(reset_Legenda);
+        </script>
+    </body>
+</html>
